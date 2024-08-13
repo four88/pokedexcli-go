@@ -75,8 +75,8 @@ func (c *Client) ListLocationArea(pageUrl *string) (LocationAreasResp, error) {
 	return locationAreasResp, nil
 }
 
-func (c *Client) GetLocationArea(name string) (LocationArea, error) {
-	endpoint := "/location-area/" + name
+func (c *Client) GetLocationArea(name *string) (LocationArea, error) {
+	endpoint := "/location-area/" + *name
 	fullUrl := baseUrl + endpoint
 
 	// check cache
@@ -112,7 +112,7 @@ func (c *Client) GetLocationArea(name string) (LocationArea, error) {
 	}
 
 	locationAreasResp := LocationArea{}
-	err = json.Unmarshal(data, locationAreasResp)
+	err = json.Unmarshal(data, &locationAreasResp)
 	if err != nil {
 		return LocationArea{}, err
 	}
